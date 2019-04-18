@@ -1,48 +1,180 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿using UnityEngine;
+using System.Collections;
 public class CharacterController : MonoBehaviour
 {
+    private float speed = 0;
+    public float wSpeed;
+    public float rSpeed;
+    public float rotSpeed;
 
-    CharacterInput character_input;
-    Rigidbody mybody; 
+    static Animator anim;
 
-    public float Speed;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // Start is called before the first frame update
     void Start()
     {
-        character_input = GetComponent<CharacterInput>();
-        mybody = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
     }
-
-    // Update is called once per frame
     void Update()
     {
-
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-
-        Vector3 moveDirection = new Vector3(horizontal, 0f, vertical) * Speed * Time.deltaTime;
-        transform.Translate(moveDirection);
-
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            speed = rSpeed;            //Running
+            if (Input.GetKey(KeyCode.W))
+            {
+                anim.SetBool("isWalking", false);
+                anim.SetBool("isRunning", true);
+                anim.SetBool("isIdle", false);
+                anim.SetBool("isIdleLeft", false);
+                anim.SetBool("isIdleRight", false);
+                anim.SetBool("isJumping", false);
+            }
+            else if (Input.GetKey(KeyCode.S))
+            {
+                anim.SetBool("isWalking", false);
+                anim.SetBool("isRunning", true);
+                anim.SetBool("isIdle", false);
+                anim.SetBool("isIdleLeft", false);
+                anim.SetBool("isIdleRight", false);
+                anim.SetBool("isJumping", false);
+            }
+            else if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.W))
+            {
+                anim.SetBool("isWalking", false);
+                anim.SetBool("isRunning", true);
+                anim.SetBool("isIdle", false);
+                anim.SetBool("isIdleLeft", false);
+                anim.SetBool("isIdleRight", false);
+                anim.SetBool("isJumping", false);
+            }
+            else if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.S))
+            {
+                anim.SetBool("isWalking", false);
+                anim.SetBool("isRunning", true);
+                anim.SetBool("isIdle", false);
+                anim.SetBool("isIdleLeft", false);
+                anim.SetBool("isIdleRight", false);
+                anim.SetBool("isJumping", false);
+            }
+            else if (Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.S))
+            {
+                anim.SetBool("isWalking", false);
+                anim.SetBool("isRunning", true);
+                anim.SetBool("isIdle", false);
+                anim.SetBool("isIdleLeft", false);
+                anim.SetBool("isIdleRight", false);
+                anim.SetBool("isJumping", false);
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                anim.SetBool("isWalking", false);
+                anim.SetBool("isRunning", false);
+                anim.SetBool("isIdle", false);
+                anim.SetBool("isIdleLeft", false);
+                anim.SetBool("isIdleRight", true);
+                anim.SetBool("isJumping", false);
+            }
+            else if (Input.GetKey(KeyCode.Space) && Input.GetKey(KeyCode.W))
+            {
+                anim.SetBool("isWalking", false);
+                anim.SetBool("isRunning", true);
+                anim.SetBool("isIdle", false);
+                anim.SetBool("isIdleLeft", false);
+                anim.SetBool("isIdleRight", false);
+                anim.SetBool("isJumping", false);
+            }
+            else if (Input.GetKey(KeyCode.Space) && Input.GetKey(KeyCode.S))
+            {
+                anim.SetBool("isWalking", false);
+                anim.SetBool("isRunning", true);
+                anim.SetBool("isIdle", false);
+                anim.SetBool("isIdleLeft", false);
+                anim.SetBool("isIdleRight", false);
+                anim.SetBool("isJumping", false);
+            }
+            else if (Input.GetKey(KeyCode.Space))
+            {
+                anim.SetBool("isWalking", false);
+                anim.SetBool("isRunning", false);
+                anim.SetBool("isIdle", false);
+                anim.SetBool("isIdleLeft", false);
+                anim.SetBool("isIdleRight", false);
+                anim.SetBool("isJumping", true);
+            }
+            else
+            {
+                //Is Idle
+                anim.SetBool("isWalking", false);
+                anim.SetBool("isRunning", false);
+                anim.SetBool("isIdle", true);
+                anim.SetBool("isIdleLeft", false);
+                anim.SetBool("isIdleRight", false);
+                anim.SetBool("isJumping", false);
+            }
+        }
+        //Walking
+        else if (Input.GetKey(KeyCode.W))
+        {
+            anim.SetBool("isWalking", true);
+            anim.SetBool("isRunning", false);
+            anim.SetBool("isIdle", false);
+            anim.SetBool("isIdleLeft", false);
+            anim.SetBool("isIdleRight", false);
+            anim.SetBool("isJumping", false);
+            speed = wSpeed;
+        }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            anim.SetBool("isWalking", true);
+            anim.SetBool("isRunning", false);
+            anim.SetBool("isIdle", false);
+            anim.SetBool("isIdleLeft", false);
+            anim.SetBool("isIdleRight", false);
+            anim.SetBool("isJumping", false);
+            speed = wSpeed;
+        }
+        else if (Input.GetKey(KeyCode.A))
+        {
+            anim.SetBool("isWalking", false);
+            anim.SetBool("isRunning", false);
+            anim.SetBool("isIdle", false);
+            anim.SetBool("isIdleLeft", true);
+            anim.SetBool("isIdleRight", false);
+            anim.SetBool("isJumping", false);
+            speed = wSpeed;
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            anim.SetBool("isWalking", false);
+            anim.SetBool("isRunning", false);
+            anim.SetBool("isIdle", false);
+            anim.SetBool("isIdleLeft", false);
+            anim.SetBool("isIdleRight", true);
+            anim.SetBool("isJumping", false);
+            speed = wSpeed;
+        }
+        else if (Input.GetKey(KeyCode.Space))
+        {
+            anim.SetBool("isWalking", false);
+            anim.SetBool("isRunning", false);
+            anim.SetBool("isIdle", false);
+            anim.SetBool("isIdleLeft", false);
+            anim.SetBool("isIdleRight", false);
+            anim.SetBool("isJumping", true);
+            speed = wSpeed;
+        }
+        else
+        {
+            //Is Idle
+            anim.SetBool("isWalking", false);
+            anim.SetBool("isRunning", false);
+            anim.SetBool("isIdle", true);
+            anim.SetBool("isIdleLeft", false);
+            anim.SetBool("isIdleRight", false);
+            anim.SetBool("isJumping", false);
+            speed = wSpeed;
+        }
+        var z = Input.GetAxis("Vertical") * speed;
+        var x = Input.GetAxis("Horizontal") * rotSpeed; transform.Translate(0, 0, z);
+        transform.Translate(x, 0, 0);
     }
+
 }
